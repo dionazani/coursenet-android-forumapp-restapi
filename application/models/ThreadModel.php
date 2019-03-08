@@ -1,11 +1,12 @@
 <?php
 
 class ThreadModel extends CI_Model {
-    public function insertThread($judul, $isi) {
+    public function insertThread($judul, $isi, $registerCreateId) {
         $result = false;
 
         $this->db->set('judul', $judul);
         $this->db->set('isi', $isi);
+        $this->db->set('register_created_id', $registerCreateId);
         $this->db->insert('thread');
 
         $result = true;
@@ -13,11 +14,12 @@ class ThreadModel extends CI_Model {
         return $result;
     }
 
-    public function insertThreadReply($threadId, $balasan) {
+    public function insertThreadReply($threadId, $balasan, $registerCreateId) {
         $result = false;
 
         $this->db->set('thread_id', $threadId);
         $this->db->set('balasan', $balasan);
+        $this->db->set('register_created_id', $registerCreateId);
         $this->db->insert('thread_reply');
 
         $result = true;
@@ -26,7 +28,7 @@ class ThreadModel extends CI_Model {
     }
 
     public function getThread($id) {
-        $sql = "SELECT * FROM thread WHERE id = ?";
+        $sql = "SELECT * FROM thread WHERE id = ? ORDER BY id";
         $query = $this->db->query($sql, array($id));
 
         return $query->result_array();

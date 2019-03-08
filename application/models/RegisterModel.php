@@ -26,4 +26,11 @@ class RegisterModel extends CI_Model {
 
         return $result;
     }
+
+    public function getRegister($username, $password) {
+        $sql = "SELECT * FROM register WHERE username = ? AND password = ?";
+        $query = $this->db->query($sql, array($username, $password));
+
+        return $query->result_array();
+    }
 }

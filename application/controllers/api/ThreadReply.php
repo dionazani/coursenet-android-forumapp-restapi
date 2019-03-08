@@ -21,9 +21,10 @@ class ThreadReply extends REST_Controller {
 
         $threadId = $this->post('threadId');
         $balasan = $this->post('balasan');
+        $registerCreateId = $this->post('registerCreateId');
 
         if ($threadId && $balasan) {
-            $result = $this->thread->insertThreadReply($threadId, $balasan);
+            $result = $this->thread->insertThreadReply($threadId, $balasan, $registerCreateId);
 
             if ($result) {
                 $message = [

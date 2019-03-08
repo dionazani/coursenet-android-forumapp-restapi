@@ -26,9 +26,10 @@ class Thread extends REST_Controller {
 
         $judul = $this->post('judul');
         $isi = $this->post('isi');
+        $registerCreateId = $this->post('registerCreateId');
 
         if ($judul && $isi) {
-            $result = $this->thread->insertThread($judul, $isi);
+            $result = $this->thread->insertThread($judul, $isi, $registerCreateId);
 
             if ($result) {
                 $message = [
