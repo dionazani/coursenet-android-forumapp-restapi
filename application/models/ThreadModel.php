@@ -27,8 +27,15 @@ class ThreadModel extends CI_Model {
         return $result;
     }
 
-    public function getThread($id) {
-        $sql = "SELECT * FROM thread WHERE id = ? ORDER BY id";
+    public function getThreadAll() {
+        $sql = "SELECT id, judul, isi, IFNULL(rating_star, '0') as rating_star FROM thread";
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
+
+    public function getThreadById($id) {
+        $sql = "SELECT id, judul, isi IFNULL(rating_star, '0') As rating_star FROM thread WHERE id = ? ORDER BY id";
         $query = $this->db->query($sql, array($id));
 
         return $query->result_array();

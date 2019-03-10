@@ -16,7 +16,7 @@ class Thread extends REST_Controller {
     }
 
     public function index_get() {
-        $thread = $this->thread->getThread();
+        $thread = $this->thread->getThreadAll();
         $this->response($thread, REST_Controller::HTTP_OK);
     }
 

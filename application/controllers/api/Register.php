@@ -18,16 +18,27 @@ class register extends REST_Controller {
     public function index_get() {
         $result = false;
 
-        $username = $this->get('username');
+        $email = $this->get('email');
         $password = $this->get('password');
 
-        if ($username && $password) {
-            $result = $this->register->getRegister($username, $password);
-            $message = [
-                'result' => $result,
-                'message' => 'Login success'
-            ];
-            $this->set_response($message, REST_Controller::HTTP_OK);
+        if ($email && $password) {
+            $result = $this->register->getRegister($email, $password);
+
+            if (!empty($result)) {
+                $message = [
+                    'result' => $result,
+                    'message' => 'Login success'
+                ];
+                $this->set_response($message, REST_Controller::HTTP_OK);
+            }
+            else {
+                $message = [
+                    'result' => $result,
+                    'message' => 'Login failed'
+                ];
+                $this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED);
+            }
+            
         }
         else {
             $message = [
